@@ -1,0 +1,77 @@
+/*
+  Glow Button (vanilla CSS)
+  - Loops a soft glow animation
+  - Pauses the animation on hover
+  - Respects prefers-reduced-motion
+
+  Usage (HTML):
+  <button class="glow-button">Click me</button>
+*/
+
+:root {
+  --glow-color: 110, 231, 255; /* RGB for #6EE7FF */
+  --button-bg: #0b1220;
+  --button-fg: #e6f7ff;
+}
+
+.glow-button {
+  appearance: none;
+  border: 0;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  font: inherit;
+  color: var(--button-fg);
+  background: var(--button-bg);
+  cursor: pointer;
+  /* Initial subtle glow so the pause frame looks fine */
+  box-shadow:
+    0 0 8px rgba(var(--glow-color), 0.28),
+    0 0 16px rgba(var(--glow-color), 0.16);
+  transition: transform 160ms ease, filter 160ms ease, background-color 160ms ease;
+
+  /* Looping glow animation */
+  animation: glowPulse 2.2s ease-in-out infinite;
+}
+
+.glow-button:hover {
+  /* Stop the loop on hover (freezes at current frame) */
+  animation-play-state: paused;
+  /* Optional micro interaction while paused */
+  transform: translateY(-1px);
+}
+
+.glow-button:active {
+  transform: translateY(0);
+}
+
+@keyframes glowPulse {
+  0% {
+    box-shadow:
+      0 0 6px rgba(var(--glow-color), 0.24),
+      0 0 12px rgba(var(--glow-color), 0.12);
+    filter: brightness(1);
+  }
+  50% {
+    box-shadow:
+      0 0 14px rgba(var(--glow-color), 0.55),
+      0 0 28px rgba(var(--glow-color), 0.38);
+    filter: brightness(1.06);
+  }
+  100% {
+    box-shadow:
+      0 0 6px rgba(var(--glow-color), 0.24),
+      0 0 12px rgba(var(--glow-color), 0.12);
+    filter: brightness(1);
+  }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .glow-button {
+    animation: none;
+  }
+  .glow-button:hover {
+    animation: none;
+  }
+}
+
