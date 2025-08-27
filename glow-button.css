@@ -33,11 +33,13 @@
   animation: glowPulse 2.2s ease-in-out infinite;
 }
 
-.glow-button:hover {
-  /* Stop the loop on hover (freezes at current frame) */
-  animation-play-state: paused;
-  /* Optional micro interaction while paused */
-  transform: translateY(-1px);
+@media (hover: hover) and (pointer: fine) {
+  .glow-button:hover {
+    /* Stop the loop on hover (freezes at current frame) */
+    animation-play-state: paused;
+    /* Optional micro interaction while paused */
+    transform: translateY(-1px);
+  }
 }
 
 .glow-button:active {
