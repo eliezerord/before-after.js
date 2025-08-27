@@ -19,6 +19,8 @@
   border: 0;
   border-radius: 0.5rem;
   padding: 0.75rem 1.25rem;
+  box-sizing: border-box;
+  width: 112px;
   font: inherit;
   color: var(--button-fg);
   background: var(--button-bg);
